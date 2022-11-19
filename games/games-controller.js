@@ -4,10 +4,10 @@ const gamesService = require('./games-service')
 class GamesController {
     async create(req, res, next) {
         try {
-            const { name, price, brandId, typeId } = req.body;
+            const { name, price, genreId, authorId } = req.body;
             const { img } = req.files;
             let prePrice = req.body.prePrice ? req.body.prePrice : ''
-            const item = await gamesService.create(name, price, brandId, typeId, img, prePrice)
+            const item = await gamesService.create(name, price, genreId, authorId, img, prePrice)
             return res.json(item)
         } catch (e) {
             next(e)
@@ -16,8 +16,8 @@ class GamesController {
 
     async getAll(req, res, next) {
         try {
-            let { brandId, typeId, limit, page } = req.query;
-            const devices = await gamesService.getAll(brandId, typeId, limit, page)
+            let { genreId, authorId, limit, page } = req.query;
+            const devices = await gamesService.getAll(genreId, authorId, limit, page)
             res.json(devices)
         } catch (e) {
             next(e)
@@ -36,7 +36,9 @@ class GamesController {
 
     async delete(req, res, next) {
         try {
-
+            const { name } = req.body;
+            const deleteGame = await gamesService.delete(name)
+            return deleteGame
         } catch (e) {
             next(e)
         }

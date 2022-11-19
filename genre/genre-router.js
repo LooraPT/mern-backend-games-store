@@ -1,11 +1,11 @@
 const Router = require('express').Router;
 const router = new Router();
-const brandController = require('./genre-controller')
+const genreController = require('./genre-controller')
 const checkRoleMiddleware = require('../middlewares/CheckRoleMiddleware')
 
-router.post('/', checkRoleMiddleware('ADMIN'), brandController.create)
-router.get('/', brandController.getAll)
-router.put('/', checkRoleMiddleware('ADMIN'), brandController.updateBrand)
-router.delete('/', checkRoleMiddleware('ADMIN'), brandController.deleteBrand)
+router.post('/', checkRoleMiddleware('ADMIN'), genreController.create)
+router.get('/', genreController.getAll)
+router.put('/', checkRoleMiddleware('ADMIN'), genreController.updateBrand)
+router.delete('/', checkRoleMiddleware('ADMIN'), genreController.deleteBrand)
 
 module.exports = router;

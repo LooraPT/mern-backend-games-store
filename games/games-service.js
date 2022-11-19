@@ -1,17 +1,18 @@
 const uuid = require('uuid')
 const path = require('path')
 const GamesModel = require('./games-model')
+const ApiError = require('../exeptions/api-error')
 
 
 
 class GamesService {
-    async create(name, price, brandId, typeId, img, prePrice) {
+    async create(name, price, authorId, genreId, img, prePrice) {
         let fileName = uuid.v4() + '.jpg'
         console.log(prePrice)
         img.mv(path.resolve(__dirname, '..', 'static', fileName))
         const item = prePrice
-            ? await GamesModel.create({ name, price, brandId, typeId, img: fileName, prePrice })
-            : await GamesModel.create({ name, price, brandId, typeId, img: fileName })
+            ? await GamesModel.create({ name, price, authorId, genreId, img: fileName, prePrice })
+            : await GamesModel.create({ name, price, authorId, genreId, img: fileName })
 
         return item
     }
@@ -49,8 +50,13 @@ class GamesService {
         return device
     }
 
-    async delete() {
-
+    async delete(name) {
+        const game = await GamesModel.findOne({ name })
+        if (!game) {
+            throw ApiError.BadRequest('not found this game')
+        }
+        const deleteGame = await GamesModel.deleteOne({ name })
+        return deleteGame
     }
 
     async update() {

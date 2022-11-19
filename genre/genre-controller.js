@@ -1,10 +1,10 @@
-const brandService = require('./genre-service')
+const genreService = require('./genre-service')
 
 class BrandController {
     async create(req, res, next) {
         try {
             const { name } = req.body;
-            const brand = await brandService.create(name);
+            const brand = await genreService.create(name);
             return res.json(brand)
         } catch (e) {
             next(e)
@@ -13,7 +13,7 @@ class BrandController {
 
     async getAll(req, res, next) {
         try {
-            const brands = await brandService.getAll();
+            const brands = await genreService.getAll();
             return res.json(brands)
         } catch (e) {
             next(e)
@@ -23,7 +23,7 @@ class BrandController {
     async updateBrand(req, res, next) {
         try {
             const { name, newName } = req.body;
-            const brand = await brandService.updateBrand(name, newName)
+            const brand = await genreService.updateBrand(name, newName)
             return res.json(brand)
         } catch (e) {
             next(e)
@@ -33,7 +33,7 @@ class BrandController {
     async deleteBrand(req, res, next) {
         try {
             const { name } = req.body;
-            const brand = await brandService.deleteBrand(name);
+            const brand = await genreService.deleteBrand(name);
             return res.json(brand)
         } catch (e) {
             next(e)

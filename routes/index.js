@@ -11,9 +11,9 @@ const checkRoleMiddleware = require('../middlewares/CheckRoleMiddleware')
 
 
 router.use('/user', userRouter);
-router.use('/type', authorRouter);
-router.use('/brand', genreRouter);
-router.use('/item', gamesRouter);
+router.use('/author', authorRouter);
+router.use('/genre', genreRouter);
+router.use('/games', gamesRouter);
 router.use('/cart', cartRouter);
 router.use('/order', orderRouter);
 router.use('/roles', checkRoleMiddleware('ADMIN'), rolesRouter);
