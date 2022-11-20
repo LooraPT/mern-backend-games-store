@@ -1,3 +1,5 @@
+const ApiError = require('../exeptions/api-error')
+const UserModel = require('../users/user-model')
 const RoleModel = require('./role-model')
 
 class RoleService {
@@ -14,8 +16,16 @@ class RoleService {
         }
     }
 
-    async giveRole(userId, role) {
+    async giveRole(email, role) {
         try {
+            const candidate = await UserModel.findOne({ email })
+            const roles = await RoleModel.findOne({ value: role })
+            if (!candidate || !role) {
+                throw ApiError.BadRequest('user is not found')
+            }
+            candidate.roles = [...candidate.roles, role]
+            candidate.save()
+            return candidate
 
         } catch (e) {
             console.log(e.message)
@@ -32,7 +42,8 @@ class RoleService {
 
     async getAllRoles() {
         try {
-
+            const roles = await RoleModel.find()
+            return roles
         } catch (e) {
             console.log(e.message)
         }

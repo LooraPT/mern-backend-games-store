@@ -44,7 +44,10 @@ class CartService {
         for (let i = 0; i < itemsCart.length; i++) {
             let a = itemsCart[i]
             const b = await ItemModel.findById(a.item)
-            items.push(b)
+            if (b) {
+                items.push(b)
+            }
+
         }
 
         return items;

@@ -14,7 +14,9 @@ class RolesController {
 
     async giveRole(req, res, next) {
         try {
-
+            const { email, role } = req.body;
+            const giveRole = await roleService.giveRole(email, role);
+            return res.json(giveRole)
         } catch (e) {
             next(e)
         }
@@ -30,7 +32,8 @@ class RolesController {
 
     async getAllRoles(req, res, next) {
         try {
-
+            const roles = await roleService.getAllRoles();
+            return res.json(roles)
         } catch (e) {
             next(e)
         }
