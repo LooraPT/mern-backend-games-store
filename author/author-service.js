@@ -1,4 +1,4 @@
-const ApiError = require("../exeptions/api-error");
+const ApiError = require("../exceptions/api-error");
 const AuthorModel = require("./author-model");
 
 

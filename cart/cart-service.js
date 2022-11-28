@@ -1,4 +1,4 @@
-const ApiError = require("../exeptions/api-error");
+const ApiError = require("../exceptions/api-error");
 const CartModel = require("./cart-model");
 const ItemModel = require("../games/games-model");
 const ItemsCart = require('./items-cart-model')

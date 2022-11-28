@@ -1,4 +1,4 @@
-const ApiError = require('../exeptions/api-error');
+const ApiError = require('../exceptions/api-error');
 const UserModel = require('./user-model');
 const bcrypt = require('bcrypt')
 const uuid = require('uuid')

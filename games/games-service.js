@@ -1,7 +1,7 @@
 const uuid = require('uuid')
 const path = require('path')
 const GamesModel = require('./games-model')
-const ApiError = require('../exeptions/api-error')
+const ApiError = require('../exceptions/api-error')
 
 
 
