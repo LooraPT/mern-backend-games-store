@@ -14,7 +14,9 @@ class OrderController {
 
     async getOrder(req, res, next) {
         try {
-
+            const { orderId } = req.query;
+            const order = await OrderService.getOrder(orderId);
+            return res.json(order)
         } catch (e) {
             next(e)
         }
