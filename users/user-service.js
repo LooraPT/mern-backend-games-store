@@ -37,7 +37,7 @@ class UserService {
             }
             const passCheck = await bcrypt.compare(password, user.password)
             if (!passCheck) {
-                throw ApiError.BadRequest('incorrect password')
+                throw ApiError.BadRequest('incorrect password or email')
             }
             const userDto = new UserDto(user);
             const tokens = tokenService.generateToken({ ...userDto })

@@ -9,8 +9,9 @@ module.exports = function (req, res, next) {
         if (!authorizationToken) {
             return next(ApiError.UnauthorizedError())
         }
+        const bearer = authorizationToken.split(' ')[0];
         const accessToken = authorizationToken.split(' ')[1];
-        if (!accessToken) {
+        if (!accessToken || !bearer) {
             return next(ApiError.UnauthorizedError())
         }
         const userData = tokenService.validateAccessToken(accessToken);

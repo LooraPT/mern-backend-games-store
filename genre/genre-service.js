@@ -1,38 +1,38 @@
-const BrandModel = require('./genre-model')
+const GenreModel = require('./genre-model')
 
 
-class BrandService {
+class GenreService {
     async create(name) {
-        const brand = await BrandModel.findOne({ name })
-        if (brand) {
-            throw ApiError.BadRequest('brand already exists')
+        const genre = await GenreModel.findOne({ name })
+        if (genre) {
+            throw ApiError.BadRequest('genre already exists')
         }
-        const createBrand = await BrandModel.create({ name })
-        return createBrand
+        const createGenre = await GenreModel.create({ name })
+        return createGenre
     }
 
     async getAll() {
-        const brands = await BrandModel.find()
-        return brands
+        const genres = await GenreModel.find()
+        return genres
     }
 
-    async updateBrand(name, newName) {
-        const brand = await BrandModel.findOne({ name })
-        if (!brand) {
-            throw ApiError.BadRequest('brand is not define')
+    async updateGenre(name, newName) {
+        const genre = await GenreModel.findOne({ name })
+        if (!genre) {
+            throw ApiError.BadRequest('genre is not define')
         }
-        brand.name = newName;
-        return brand.save()
+        genre.name = newName;
+        return genre.save()
     }
 
-    async deleteBrand(name) {
-        const brand = await BrandModel.findOne({ name })
-        if (!brand) {
-            throw ApiError.BadRequest(`this brand ${name} is not exists`)
+    async deleteGenre(name) {
+        const genre = await GenreModel.findOne({ name })
+        if (!genre) {
+            throw ApiError.BadRequest(`this genre ${name} is not exists`)
         }
-        const deleteBrand = await BrandModel.deleteOne({ name })
-        return deleteBrand
+        const deleteGenre = await GenreModel.deleteOne({ name })
+        return deleteGenre
     }
 }
 
-module.exports = new BrandService();
+module.exports = new GenreService();

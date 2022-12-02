@@ -1,11 +1,11 @@
 const genreService = require('./genre-service')
 
-class BrandController {
+class GenreController {
     async create(req, res, next) {
         try {
             const { name } = req.body;
-            const brand = await genreService.create(name);
-            return res.json(brand)
+            const genre = await genreService.create(name);
+            return res.json(genre)
         } catch (e) {
             next(e)
         }
@@ -13,32 +13,32 @@ class BrandController {
 
     async getAll(req, res, next) {
         try {
-            const brands = await genreService.getAll();
-            return res.json(brands)
+            const genres = await genreService.getAll();
+            return res.json(genres)
         } catch (e) {
             next(e)
         }
     }
 
-    async updateBrand(req, res, next) {
+    async updateGenre(req, res, next) {
         try {
             const { name, newName } = req.body;
-            const brand = await genreService.updateBrand(name, newName)
-            return res.json(brand)
+            const genre = await genreService.updateGenre(name, newName)
+            return res.json(genre)
         } catch (e) {
             next(e)
         }
     }
 
-    async deleteBrand(req, res, next) {
+    async deleteGenre(req, res, next) {
         try {
             const { name } = req.body;
-            const brand = await genreService.deleteBrand(name);
-            return res.json(brand)
+            const genre = await genreService.deleteGenre(name);
+            return res.json(genre)
         } catch (e) {
             next(e)
         }
     }
 }
 
-module.exports = new BrandController()
+module.exports = new GenreController()
