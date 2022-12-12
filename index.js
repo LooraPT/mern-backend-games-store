@@ -23,15 +23,11 @@ app.use('/api', router);
 app.use(errorMiddleware);
 
 const start = async () => {
-    try {
-        await mongoose.connect(process.env.MONGO_DB, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        })
-        app.listen(PORT, () => console.log(`server started on PORT = ${PORT}`))
-    } catch (e) {
-        console.log(e.message);
-    };
+    await mongoose.connect(process.env.MONGO_DB, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+    app.listen(PORT, () => console.log(`server started on PORT = ${PORT}`));
 }
 
 start();

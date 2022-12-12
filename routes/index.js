@@ -9,6 +9,7 @@ const rolesRouter = require('../roles/roles-router');
 const orderRouter = require('../order/order-router');
 const checkRoleMiddleware = require('../middlewares/CheckRoleMiddleware');
 const authMiddleware = require('../middlewares/AuthMiddleware');
+const aboutRouter = require('../about/about-router')
 
 
 router.use('/user', userRouter);
@@ -18,6 +19,7 @@ router.use('/games', gamesRouter);
 router.use('/cart', authMiddleware, cartRouter);
 router.use('/order', authMiddleware, orderRouter);
 router.use('/roles', checkRoleMiddleware('ADMIN'), rolesRouter);
+router.use('/about', aboutRouter)
 
 
 module.exports = router;

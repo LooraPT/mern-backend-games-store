@@ -36,9 +36,9 @@ class GamesController {
 
     async delete(req, res, next) {
         try {
-            const { name } = req.body;
-            const deleteGame = await gamesService.delete(name)
-            return deleteGame
+            const { id } = req.params;
+            const deleteGame = await gamesService.delete(id)
+            return res.json(deleteGame);
         } catch (e) {
             next(e)
         }

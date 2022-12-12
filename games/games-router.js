@@ -5,7 +5,7 @@ const checkRoleMiddleware = require('../middlewares/CheckRoleMiddleware')
 
 router.post('/', checkRoleMiddleware('ADMIN'), gamesController.create)
 router.put('/', checkRoleMiddleware('ADMIN'), gamesController.update)
-router.delete('/', checkRoleMiddleware('ADMIN'), gamesController.delete)
+router.delete('/:id', checkRoleMiddleware('ADMIN'), gamesController.delete)
 router.get('/', gamesController.getAll)
 router.get('/:id', gamesController.getOne)
 

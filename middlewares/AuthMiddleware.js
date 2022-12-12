@@ -10,6 +10,9 @@ module.exports = function (req, res, next) {
             return next(ApiError.UnauthorizedError())
         }
         const bearer = authorizationToken.split(' ')[0];
+        if (bearer !== 'Bearer') {
+            return next(ApiError.UnauthorizedError())
+        }
         const accessToken = authorizationToken.split(' ')[1];
         if (!accessToken || !bearer) {
             return next(ApiError.UnauthorizedError())
