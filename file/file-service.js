@@ -10,7 +10,6 @@ class FileService {
     }
 
     removeImg(fileName) {
-        console.log(fileName)
         const removeFileImg = fs.unlink(path.resolve(__dirname, '..', 'static', fileName), (err => {
             if (err) {
                 console.log(err);
