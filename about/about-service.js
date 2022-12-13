@@ -15,7 +15,7 @@ class AboutService {
             const createPost = await AboutModel.create({ img: filename, userId: id, text1, text2, title });
             return createPost;
         } catch (e) {
-            throw ApiError.BadRequest('Create about is error')
+            console.log(e.message)
         }
     }
 
