@@ -31,10 +31,10 @@ class AboutService {
             findPost.text1 = text1;
             findPost.text2 = text2;
             findPost.img = filename;
-            findPost.save();
+            await findPost.save();
             return findPost;
         } catch (e) {
-            throw ApiError.BadRequest('Error catch')
+            console.log(e.message)
         }
     }
 
@@ -48,16 +48,16 @@ class AboutService {
             const deletePost = await AboutModel.findByIdAndDelete(id);
             return deletePost.title;
         } catch (e) {
-            throw ApiError.BadRequest('Error catch')
+            console.log(e.message)
         }
     }
 
     async getAll() {
         try {
-            const getPosts = await AboutModel.find()
+            const getPosts = await AboutModel.find();
             return getPosts;
         } catch (e) {
-            throw ApiError.BadRequest('Error catch')
+            console.log(e.message)
         }
     }
 }

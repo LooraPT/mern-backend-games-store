@@ -1,4 +1,5 @@
-const GamesModel = require('./games-model')
+const GamesModel = require('./games-model');
+const OrderModel = require('../order/order-model');
 const ApiError = require('../exceptions/api-error')
 const fileService = require('../file/file-service')
 
@@ -60,8 +61,13 @@ class GamesService {
         return deleteGame;
     }
 
-    async update() {
-
+    async mostPopular() {
+        try {
+            const allOrder = await OrderModel.find()
+            return allOrder
+        } catch (e) {
+            console.log(e)
+        }
     }
 
 }

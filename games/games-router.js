@@ -4,9 +4,9 @@ const gamesController = require('./games-controller')
 const checkRoleMiddleware = require('../middlewares/CheckRoleMiddleware')
 
 router.post('/', checkRoleMiddleware('ADMIN'), gamesController.create)
-router.put('/', checkRoleMiddleware('ADMIN'), gamesController.update)
 router.delete('/:id', checkRoleMiddleware('ADMIN'), gamesController.delete)
 router.get('/', gamesController.getAll)
+router.get('/popular', gamesController.popular)
 router.get('/:id', gamesController.getOne)
 
 

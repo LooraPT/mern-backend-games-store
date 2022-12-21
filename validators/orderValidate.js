@@ -3,7 +3,7 @@ const { body, check } = require("express-validator")
 module.exports = orderValidate = () => {
     return [
         body('email').isEmail(),
-        body('phone').isMobilePhone(),
+        body('phone').not().isEmpty(),
         check('country', 'Country is required').not().isEmpty(),
         check('city', 'City is required').not().isEmpty(),
         check('street', 'Street is required').not().isEmpty(),

@@ -44,9 +44,10 @@ class GamesController {
         }
     }
 
-    async update(req, res, next) {
+    async popular(req, res, next) {
         try {
-
+            const games = await gamesService.mostPopular();
+            res.json(games)
         } catch (e) {
             next(e)
         }
