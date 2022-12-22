@@ -7,7 +7,6 @@ const Games = new Schema({
     img: { type: String, required: true, unique: true },
     authorId: { type: Schema.Types.ObjectId, ref: 'Author' },
     genreId: { type: Schema.Types.ObjectId, ref: 'Genre' },
-
 })
 
 module.exports = model('Games', Games);

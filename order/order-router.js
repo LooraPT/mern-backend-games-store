@@ -6,7 +6,8 @@ const orderController = require('./order-controller')
 
 
 router.post('/', AuthMiddleware, orderValidate(), orderController.create)
-router.get('/', orderController.getOrder)
+router.get('/', orderController.getAllOrder)
+router.get('/:id', orderController.getOrder)
 
 
 

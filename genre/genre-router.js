@@ -5,7 +5,8 @@ const checkRoleMiddleware = require('../middlewares/CheckRoleMiddleware')
 
 router.post('/', checkRoleMiddleware('ADMIN'), genreController.create)
 router.get('/', genreController.getAll)
+router.get('/popular', genreController.popular)
 router.put('/', checkRoleMiddleware('ADMIN'), genreController.updateGenre)
-router.delete('/', checkRoleMiddleware('ADMIN'), genreController.deleteGenre)
+router.delete('/', checkRoleMiddleware('ADMIN'), genreController.deleteGenreWhitGames)
 
 module.exports = router;

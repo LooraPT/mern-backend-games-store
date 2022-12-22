@@ -30,10 +30,19 @@ class GenreController {
         }
     }
 
-    async deleteGenre(req, res, next) {
+    async deleteGenreWhitGames(req, res, next) {
         try {
             const { name } = req.body;
-            const genre = await genreService.deleteGenre(name);
+            const genre = await genreService.deleteGenreAndAllGames(name);
+            return res.json(genre)
+        } catch (e) {
+            next(e)
+        }
+    }
+
+    async popular(req, res, next) {
+        try {
+            const genre = await genreService.mostPopular();
             return res.json(genre)
         } catch (e) {
             next(e)

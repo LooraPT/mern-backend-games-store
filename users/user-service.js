@@ -6,6 +6,8 @@ const UserDto = require('../dtos/user-dto');
 const RoleModel = require('../roles/role-model');
 const tokenService = require('../token/token-service')
 const CartModel = require('../cart/cart-model')
+const OrderModel = require('../order/order-model')
+const GamesModel = require('../games/games-model')
 
 class UserService {
     async registration(email, password) {
@@ -75,6 +77,60 @@ class UserService {
             return { ...tokens, user: userDto }
         } catch (e) {
             console.log(e.message)
+        }
+    }
+
+    async popularGamesByGenre(id) {
+        try {
+            const userOrders = await OrderModel.find({ user: id });
+            const allGenre = []
+            const buyGamesName = [];
+            for (let i = 0; i < userOrders.length; i++) {
+                const order = userOrders[i];
+                for (let j = 0; j < order.gamesId.length; j++) {
+                    const game = await GamesModel.findById(order.gamesId[j])
+                    if (game?.genreId) {
+                        allGenre.push(game.genreId)
+                        buyGamesName.push(game.name)
+                    }
+                }
+            }
+            allGenre.sort()
+
+            let obj = {};
+            for (let i = 0; i < allGenre.length; i++) {
+                let key = allGenre[i];
+                if (obj[key]) {
+                    obj[key]++
+                } else {
+                    obj[key] = 1;
+                }
+            }
+
+            let maxCount = 0;
+            let maxElement = null;
+            for (let key in obj) {
+                if (maxCount < obj[key]) {
+                    maxCount = obj[key];
+                    maxElement = key;
+                }
+            }
+
+            const result = []
+            if (maxElement) {
+                const favoriteGames = await GamesModel.find({ genreId: maxElement });
+                for (const game of favoriteGames) {
+                    result = favoriteGames.filter((game, index) => game.name !== buyGamesName[index])
+                }
+            }
+
+            if (result) {
+                return result
+            }
+
+            return null
+        } catch (e) {
+            console.log(e)
         }
     }
 }

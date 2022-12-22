@@ -34,12 +34,17 @@ class OrderService {
         }
     }
 
-    async getOrder(orderId) {
-        const order = await OrderModel.findById(orderId)
+    async getOrder(id) {
+        const order = await OrderModel.findById(id)
         if (!order) {
             throw ApiError.BadRequest('not found order')
         }
         return order;
+    }
+
+    async getAllOrder() {
+        const order = await OrderModel.find()
+        return order
     }
 
 

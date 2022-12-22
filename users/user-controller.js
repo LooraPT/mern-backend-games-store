@@ -61,6 +61,16 @@ class UserController {
             next(e);
         }
     }
+
+    async popular(req, res, next) {
+        try {
+            const { id } = req.user;
+            const favoriteGenre = await userService.popularGamesByGenre(id)
+            return res.json(favoriteGenre)
+        } catch (e) {
+            next(e)
+        }
+    }
 }
 
 module.exports = new UserController()

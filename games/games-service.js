@@ -64,12 +64,43 @@ class GamesService {
     async mostPopular() {
         try {
             const allOrder = await OrderModel.find()
-            return allOrder
+            const allItems = []
+            for (let i = 0; i < allOrder.length; i++) {
+                const order = allOrder[i];
+                for (let j = 0; j < order.gamesId.length; j++) {
+                    allItems.push(order.gamesId[j])
+                }
+            }
+            allItems.sort()
+
+            let obj = {};
+            for (let i = 0; i < allItems.length; i++) {
+                let key = allItems[i];
+                if (obj[key]) {
+                    obj[key]++
+                } else {
+                    obj[key] = 1;
+                }
+            }
+
+            let maxCount = 0;
+            let maxElement = null;
+            for (var key in obj) {
+                if (maxCount < obj[key]) {
+                    maxCount = obj[key];
+                    maxElement = key;
+                }
+            }
+
+            const popularGame = await GamesModel.findById(maxElement)
+            if (!popularGame) {
+                throw ApiError.BadRequest('Did not find a popular game')
+            }
+            return popularGame
         } catch (e) {
             console.log(e)
         }
     }
-
 }
 
 module.exports = new GamesService()

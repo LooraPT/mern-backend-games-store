@@ -10,5 +10,6 @@ router.post('/registration', userValidator(), userController.registration)
 router.post('/login', userValidator(), userController.login)
 router.post('/logout', userController.logout)
 router.get('/refresh', userController.refresh)
+router.get('/popular', authMiddleware, userController.popular)
 
 module.exports = router;
